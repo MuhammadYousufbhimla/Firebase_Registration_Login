@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "106631559005",
+    "project_id": "registerlogin-acb33",
+    "storage_bucket": "registerlogin-acb33.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:106631559005:android:eff061ac3ffff4ef4d9ab4",
+        "android_client_info": {
+          "package_name": "com.example.login_register"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "106631559005-3itt42gijg3sub27lg1qktavekhc5ood.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLNvZX_Mh1U2gU7QZ6HZ5YDOiCcotNOQQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "106631559005-3itt42gijg3sub27lg1qktavekhc5ood.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
