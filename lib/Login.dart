@@ -80,7 +80,7 @@ FirebaseAuth auth = FirebaseAuth.instance;
             ),
             Container(
               margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.03,
+                  top: MediaQuery.of(context).size.height * 0.02,
                   left: MediaQuery.of(context).size.width * 0.05,
                   right: MediaQuery.of(context).size.width * 0.05),
               child: TextField(
