@@ -2,55 +2,50 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'Login.dart';
 
-
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
-     
-    
+
   @override
   State<Register> createState() => _RegisterState();
 }
 
 class _RegisterState extends State<Register> {
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
 
+  FirebaseAuth auth = FirebaseAuth.instance;
 
-   TextEditingController email =TextEditingController();
- TextEditingController password =TextEditingController();
+  Future signup1() async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: email.text, password: password.text);
+      // ScaffoldMessenger.of(context).showSnackBar(
 
-FirebaseAuth auth = FirebaseAuth.instance;
-
-Future signup1() async {
-  try {
-    UserCredential userCredential = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(
-            email: email.text, password: password.text);
-            // ScaffoldMessenger.of(context).showSnackBar(
-
-            //   SnackBar(content: Text("Sucessfully Register.You Can Login Now",style: TextStyle(color: Colors.black),),
-            //          duration: Duration(seconds: 20),
-            //   )
-            // );
-           //  Navigator.of(context).pop();
-  } on FirebaseAuthException catch (e) {
-    if (e.code == 'weak-password') {
-      print('The password provided is too weak.');
-    } else if (e.code == 'email-already-in-use') {
-      print('The account already exists for that email.');
+      //   SnackBar(content: Text("Sucessfully Register.You Can Login Now",style: TextStyle(color: Colors.black),),
+      //          duration: Duration(seconds: 20),
+      //   )
+      // );
+      //  Navigator.of(context).pop();
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
     }
-  } catch (e) {
-    print(e);
   }
-}
-bool _validate = false;
+
+  bool _validate = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.lightBlue ,
+        backgroundColor: Colors.lightBlue,
         body: SafeArea(
             child: ListView(
-
-
           children: [
             videocard(context),
             Container(
@@ -65,7 +60,7 @@ bool _validate = false;
                       letterSpacing: 2,
                       fontWeight: FontWeight.bold),
                 )),
-      
+
             Container(
               margin: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.03,
@@ -78,8 +73,7 @@ bool _validate = false;
                 decoration: InputDecoration(
                   fillColor: Colors.black,
                   labelText: 'Email',
-                
-                errorText: _validate ? 'Email Can\'t Be Empty' : null,
+                  errorText: _validate ? 'Email Can\'t Be Empty' : null,
                 ),
               ),
             ),
@@ -90,17 +84,15 @@ bool _validate = false;
                   right: MediaQuery.of(context).size.width * 0.05),
               child: TextField(
                 controller: password,
-                     keyboardType: TextInputType.number,
+                keyboardType: TextInputType.number,
                 style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   labelText: 'Password',
-                        errorText: _validate ? 'Password Can\'t Be Empty' : null,
+                  errorText: _validate ? 'Password Can\'t Be Empty' : null,
                 ),
               ),
             ),
-
-     
 
             // Register and Cancel button
             Padding(
@@ -119,14 +111,10 @@ bool _validate = false;
                         MediaQuery.of(context).size.width * 0.07),
                   ),
                   onPressed: () {
-                     
-                       
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
-                   
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Login()));
                   },
-                  
                   child: Text(
-                       
                     "Login",
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
                   ),
@@ -143,24 +131,18 @@ bool _validate = false;
                     minimumSize: Size(MediaQuery.of(context).size.height * 0.07,
                         MediaQuery.of(context).size.width * 0.07),
                   ),
-                onPressed: () {
-                  setState(() {
-                    email.text.isEmpty ? _validate = true : _validate = false;
-                    password.text.isEmpty?_validate=true:_validate=false;
+                  onPressed: () {
+                    setState(() {
+                      email.text.isEmpty ? _validate = true : _validate = false;
+                      password.text.isEmpty
+                          ? _validate = true
+                          : _validate = false;
                       signup1();
-                      email.text="";  
-                      password.text="";
-                
-                      
-                    
-                    }
-
-
-                  
-                  );
-                },
-                  child: 
-                  Text(
+                      email.text = "";
+                      password.text = "";
+                    });
+                  },
+                  child: Text(
                     "Register",
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
                   ),
@@ -171,8 +153,6 @@ bool _validate = false;
         )));
   }
 }
-
-
 
 Widget videocard(context) {
   return Container(
@@ -205,27 +185,25 @@ Widget videocard(context) {
               fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15),
         ),
       ),
-     Padding(padding: EdgeInsets.all(05)),
+      Padding(padding: EdgeInsets.all(05)),
       Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * 0.18,
           decoration: BoxDecoration(
-             boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withOpacity(0.2),
-          spreadRadius: 5,
-          blurRadius: 7,
-          offset: Offset(0, 3), // changes position of shadow
-        ),
-      ],
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ],
             borderRadius: BorderRadius.circular(08),
-          //   image: DecorationImage(
-          //   fit: BoxFit.fill,
-          //   image: AssetImage("assets/L5.png"),
-          // )
-           )
-          )
+            //   image: DecorationImage(
+            //   fit: BoxFit.fill,
+            //   image: AssetImage("assets/L5.png"),
+            // )
+          ))
     ]),
   );
 }
-
