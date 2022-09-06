@@ -30,7 +30,7 @@ class _HomeState extends State<Home> {
         builder: (BuildContext ctx) {
           return Padding(
             padding: EdgeInsets.only(
-                top: 21,
+                top: 20,
                 left: 20,
                 right: 20,
           
