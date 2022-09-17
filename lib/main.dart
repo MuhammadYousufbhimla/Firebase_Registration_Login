@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'Register.dart';
+import 'image.dart';
 
 
 Future main() async{
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         
         primarySwatch: Colors.blue,
       ),
-      home: Register(),
+      home: HomePage(),
     );
   }
 }

@@ -1,3 +1,7 @@
+
+
+
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 class Home extends StatefulWidget {
@@ -10,8 +14,10 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
     final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _priceController = TextEditingController();
-
+    final TextEditingController _priceController = TextEditingController();  
+    final TextEditingController _addressController  = TextEditingController();
+// late File _image;    
+// late String _uploadedFileURL;
   
   final CollectionReference _products =
       FirebaseFirestore.instance.collection('Product');
@@ -21,6 +27,7 @@ class _HomeState extends State<Home> {
     if (documentSnapshot != null) {
       action = 'update';
       _nameController.text = documentSnapshot['name'];
+      _addressController.text=documentSnapshot['address'];
       _priceController.text = documentSnapshot['price'].toString();
     }
 
@@ -51,6 +58,10 @@ class _HomeState extends State<Home> {
                     labelText: 'Price',
                   ),
                 ),
+                  TextField(
+                  controller: _addressController,
+                  decoration: const InputDecoration(labelText: 'Address'),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -60,23 +71,24 @@ class _HomeState extends State<Home> {
                     final String? name = _nameController.text;
                     final double? price =
                         double.tryParse(_priceController.text);
-                    if (name != null && price != null) {
+                     final String? address = _addressController.text;
+                    if (name != null && price != null && address!=null) {
                       if (action == 'create') {
                         // Persist a new product to Firestore
-                        await _products.add({"name": name, "price": price});
+                        await _products.add({"name": name, "price": price,"address":address});
                       }
 
                       if (action == 'update') {
                         // Update the product
                         await _products
                             .doc(documentSnapshot!.id)
-                            .update({"name": name, "price": price});
+                            .update({"name": name, "price": price,"address":address});
                       }
 
                       // Clear the text fields
                       _nameController.text = '';
                       _priceController.text = '';
-
+                       _addressController.text='';
                       // Hide the bottom sheet
                       Navigator.of(context).pop();
                     }
@@ -116,6 +128,7 @@ class _HomeState extends State<Home> {
                 return Card(
                   margin: const EdgeInsets.all(10),
                   child: ListTile(
+                    leading: Text(documentSnapshot['address']),
                     title: Text(documentSnapshot['name']),
                     subtitle: Text(documentSnapshot['price'].toString()),
                     trailing: SizedBox(
