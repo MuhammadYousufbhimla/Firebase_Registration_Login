@@ -149,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                             dense: false,
                             leading: Image.network(image['url']),
                             title: Text(image['uploaded_by']),
-                            subtitle: Text(image['description']),
+                            subtitle: Text(image['descriptzxion']),
                             trailing: IconButton(
                               onPressed: () => _delete(image['path']),
                               icon: const Icon(
