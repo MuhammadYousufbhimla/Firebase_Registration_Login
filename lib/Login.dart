@@ -15,22 +15,24 @@ class _LoginState extends State<Login> {
   late String password;
   FirebaseAuth auth = FirebaseAuth.instance;
 
-  Future Login(context) async {
-    try {
-      var user = await auth.signInWithEmailAndPassword(
-          email: email, password: password);
-      if (user != null) {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Home()));
-      } else {
-        print("Password invalid ");
+    Future Login(context) async {
+      try {
+        var user = await auth.signInWithEmailAndPassword(
+            email: email, password: password);
+        if (user != null) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Home()));
+        } else {
+          print("Password invalid ");
+        }
+      } catch (e) {
+        print(e);
       }
-    } catch (e) {
-      print(e);
     }
-  }
 
-  bool _validate = false;
+    bool _validate = false;
+       String date = "";
+DateTime selectedDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,4 +143,9 @@ class _LoginState extends State<Login> {
           ],
         )));
   }
+
+ 
+
 }
+
+

@@ -159,7 +159,7 @@ class _HomeeeState extends State<Homeee> {
         child: 
         ElevatedButton(onPressed: ()async{
 
-          final result=await FilePicker.platform.pickFiles(allowMultiple: false,type: FileType.custom,allowedExtensions: ['png','jpg']);
+          final result=await FilePicker.platform.pickFiles(allowMultiple: false,type: FileType.custom,allowedExtensions: ['png','jpeg']);
 
          if(result==null){
           ScaffoldMessenger.of(context).showSnackBar( SnackBar(content: Text('No file selected')));
@@ -168,13 +168,13 @@ class _HomeeeState extends State<Homeee> {
          } 
         final path=result.files.single.path!;
         final filename=result.files.single.name;
-       
+         print(path);
+        print(filename);
      storage.uploadfiles(path,filename).then((value) => print('Done'));
-        // print(path);
-        // print(filename);
+      
         },
         
-         child: Text('Uplaod file')),
+         child: Text('Uplaod file')), 
       )
     ]), 
     );
